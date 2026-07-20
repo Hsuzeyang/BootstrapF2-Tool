@@ -50,18 +50,18 @@ def bca_bootstrap(data_ref, data_test, n_boot=20000, alpha=0.05, seed=42):
 
 # 网页页面
 st.set_page_config(page_title="BootstrapF2在线计算工具", layout="wide")
-st.title("BootstrapF2置信区间在线分析")
+st.title("BootstrapF2在线分析工具")
 
 
 col1, col2 = st.columns(2)
 with col1:
-    st.subheader("参比制剂溶出数据")
+    st.subheader("参比制剂溶曲数据")
     ref_text = st.text_area("每行1个样品，逗号分隔各时间点", value="12,35,62,83,97\n14,33,65,81,96\n11,37,60,85,98\n13,34,63,82,95\n12,36,61,84,97\n14,32,64,80,96")
 with col2:
-    st.subheader("受试制剂溶出数据")
+    st.subheader("受试制剂溶曲数据")
     test_text = st.text_area("每行1个样品，逗号分隔各时间点", value="13,34,61,82,96\n12,36,63,84,98\n14,33,60,81,95\n11,35,62,83,97\n13,32,64,80,96\n12,37,65,85,99")
 
-n_boot = st.slider("Bootstrap重采样次数", min_value=5000, max_value=30000, value=20000, step=5000)
+n_boot = st.slider("Bootstrap抽样次数", min_value=5000, max_value=30000, value=20000, step=5000)
 alpha = 0.05
 
 # 解析输入数据
