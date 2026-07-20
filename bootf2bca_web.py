@@ -95,6 +95,6 @@ if st.button("Bootstrap计算"):
     ax.axvline(ci_high, color="orange", ls="--", lw=1.5, label=f"95%CI upper limit={ci_high:.2f}")
     ax.axvline(50, color="green", ls=":", lw=2, label="Cutoff value 50")
     ax.set_xlabel("f2 value")
-    ax.set_ylabel("Bootstrap frequency")
+    ax.set_ylabel("Frequency")
     ax.legend()
     st.pyplot(fig)
