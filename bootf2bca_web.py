@@ -12,7 +12,7 @@ def calc_f2(ref, test):
     f2 = 50 * np.log10(100 / np.sqrt(1 + sum_sq / n))
     return f2
 
-def bca_bootstrap(data_ref, data_test, n_boot=20000, alpha=0.05, seed=42):
+def bca_bootstrap(data_ref, data_test, n_boot=20000, alpha=0.1, seed=42):
     np.random.seed(seed)
     n_ref = data_ref.shape[0]
     n_test = data_test.shape[0]
@@ -62,7 +62,7 @@ with col2:
     test_text = st.text_area("每行1个样品，逗号分隔各时间点", value="13,34,61,82,96\n12,36,63,84,98\n14,33,60,81,95\n11,35,62,83,97\n13,32,64,80,96\n12,37,65,85,99")
 
 n_boot = st.slider("Bootstrap抽样次数", min_value=5000, max_value=30000, value=20000, step=5000)
-alpha = 0.05
+alpha = 0.1
 
 # 解析输入数据
 def parse_data(text):
@@ -81,7 +81,7 @@ if st.button("Bootstrap计算"):
     # 结果输出
     st.subheader("计算结果")
     st.write(f"Normal f2：{f2_ori:.2f}")
-    st.write(f"95% CI：[{ci_low:.2f}, {ci_high:.2f}]")
+    st.write(f"90% CI：[{ci_low:.2f}, {ci_high:.2f}]")
     if ci_low >= 50:
         st.success("判定：置信下限≥50，溶出曲线相似")
     else:
