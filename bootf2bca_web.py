@@ -90,7 +90,7 @@ if st.button("Bootstrap计算"):
     # 绘制Bootstrap分布直方图
     fig, ax = plt.subplots(figsize=(10,5))
     ax.hist(boot_dist, bins=60, alpha=0.7, color="#4488dd")
-    ax.axvline(f2_ori, color="red", lw=2, label=f"原始f2={f2_ori:.2f}")
+    ax.axvline(f2_ori, color="red", lw=2, label=f"Normal f2={f2_ori:.2f}")
     ax.axvline(ci_low, color="orange", ls="--", lw=1.5, label=f"95%CI lower limit={ci_low:.2f}")
     ax.axvline(ci_high, color="orange", ls="--", lw=1.5, label=f"95%CI upper limit={ci_high:.2f}")
     ax.axvline(50, color="green", ls=":", lw=2, label="Cutoff value 50")
