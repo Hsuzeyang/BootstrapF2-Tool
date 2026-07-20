@@ -49,9 +49,9 @@ def bca_bootstrap(data_ref, data_test, n_boot=20000, alpha=0.05, seed=42):
     return f2_ori, ci_l, ci_u, boot_f2
 
 # 网页页面
-st.set_page_config(page_title="bootf2BCA_v1.4 在线计算工具", layout="wide")
-st.title("bootf2BCA v1.4 溶出f2-BCA置信区间在线分析")
-st.markdown("复刻开源R包bootf2BCA_v1.4算法，适用于小批量制剂溶出相似性评估")
+st.set_page_config(page_title="BootstrapF2在线计算工具", layout="wide")
+st.title("BootstrapF2置信区间在线分析")
+
 
 col1, col2 = st.columns(2)
 with col1:
@@ -73,7 +73,7 @@ def parse_data(text):
         mat.append(row)
     return np.array(mat)
 
-if st.button("执行BCA Bootstrap计算"):
+if st.button("Bootstrap计算"):
     ref_mat = parse_data(ref_text)
     test_mat = parse_data(test_text)
     with st.spinner("正在计算（采样次数越大耗时越久）..."):
@@ -81,7 +81,7 @@ if st.button("执行BCA Bootstrap计算"):
     # 结果输出
     st.subheader("计算结果")
     st.write(f"原始f2值：{f2_ori:.2f}")
-    st.write(f"95% BCA置信区间：[{ci_low:.2f}, {ci_high:.2f}]")
+    st.write(f"95% 置信区间：[{ci_low:.2f}, {ci_high:.2f}]")
     if ci_low >= 50:
         st.success("判定：置信下限≥50，溶出曲线相似")
     else:
@@ -91,10 +91,10 @@ if st.button("执行BCA Bootstrap计算"):
     fig, ax = plt.subplots(figsize=(10,5))
     ax.hist(boot_dist, bins=60, alpha=0.7, color="#4488dd")
     ax.axvline(f2_ori, color="red", lw=2, label=f"原始f2={f2_ori:.2f}")
-    ax.axvline(ci_low, color="orange", ls="--", lw=1.5, label=f"95%CI下限={ci_low:.2f}")
-    ax.axvline(ci_high, color="orange", ls="--", lw=1.5, label=f"95%CI上限={ci_high:.2f}")
-    ax.axvline(50, color="green", ls=":", lw=2, label="相似阈值50")
+    ax.axvline(ci_low, color="orange", ls="--", lw=1.5, label=f"95%CI lower limit={ci_low:.2f}")
+    ax.axvline(ci_high, color="orange", ls="--", lw=1.5, label=f"95%CI upper limit={ci_high:.2f}")
+    ax.axvline(50, color="green", ls=":", lw=2, label="Cutoff value 50")
     ax.set_xlabel("f2 value")
-    ax.set_ylabel("Bootstrap频次")
+    ax.set_ylabel("Bootstrap frequency")
     ax.legend()
     st.pyplot(fig)
